@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Cookies from "js-cookie";
 
@@ -54,123 +54,142 @@ const ConditionalWrapper = ({ condition, wrapper, children }) => {
   return condition ? wrapper(children) : children;
 };
 
-class CookieConsent extends Component {
-  constructor(props) {
-    super(props);
+export function CookieConsent({
+  disableStyles = false,
+  hideOnAccept = true,
+  hideOnDecline = true,
+  location = OPTIONS.BOTTOM,
+  onAccept = () => {},
+  onDecline = () => {},
+  cookieName = defaultCookieConsentName,
+  cookieValue = true,
+  declineCookieValue = false,
+  setDeclineCookie = true,
+  buttonText = "I understand",
+  declineButtonText = "I decline",
+  debug = false,
+  expires = 365,
+  containerClasses = "CookieConsent",
+  contentClasses = "",
+  buttonClasses = "",
+  buttonWrapperClasses = "",
+  declineButtonClasses = "",
+  buttonId = "rcc-confirm-button",
+  declineButtonId = "rcc-decline-button",
+  extraCookieOptions = {},
+  disableButtonStyles = false,
+  enableDeclineButton = false,
+  flipButtons = false,
+  sameSite = SAME_SITE_OPTIONS.LAX,
+  ButtonComponent = ({ children, ...props }) => <button {...props}>{children}</button>,
+  overlay = false,
+  overlayClasses = "",
+  ariaAcceptLabel = "Accept cookies",
+  ariaDeclineLabel = "Decline cookies",
+  style = {},
+  contentStyle = {},
+  buttonStyle = {},
+  overlayStyle = {},
+  declineButtonStyle = {},
+  children = {},
+  cookieSecurity,
+}) {
+  const [visible, setVisible] = useState(false);
 
-    this.state = {
-      visible: false,
-      style: {
-        alignItems: "baseline",
-        background: "#353535",
-        color: "white",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        left: "0",
-        position: "fixed",
-        width: "100%",
-        zIndex: "999",
-      },
-      buttonStyle: {
-        background: "#ffd42d",
-        border: "0",
-        borderRadius: "0px",
-        boxShadow: "none",
-        color: "black",
-        cursor: "pointer",
-        flex: "0 0 auto",
-        padding: "5px 10px",
-        margin: "15px",
-      },
-      declineButtonStyle: {
-        background: "#c12a2a",
-        border: "0",
-        borderRadius: "0px",
-        boxShadow: "none",
-        color: "#e5e5e5",
-        cursor: "pointer",
-        flex: "0 0 auto",
-        padding: "5px 10px",
-        margin: "15px",
-      },
-      contentStyle: {
-        flex: "1 0 300px",
-        margin: "15px",
-      },
-      overlayStyle: {
-        position: "fixed",
-        left: 0,
-        top: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: "999",
-        backgroundColor: "rgba(0,0,0,0.3)",
-      },
-    };
-  }
-
-  componentDidMount() {
-    const { debug } = this.props;
-
-    // if cookie undefined or debug
-    if (this.getCookieValue() === undefined || debug) {
-      this.setState({ visible: true });
-    }
-  }
+  const state = {
+    style: {
+      alignItems: "baseline",
+      background: "#353535",
+      color: "white",
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      left: "0",
+      position: "fixed",
+      width: "100%",
+      zIndex: "999",
+    },
+    buttonStyle: {
+      background: "#ffd42d",
+      border: "0",
+      borderRadius: "0px",
+      boxShadow: "none",
+      color: "black",
+      cursor: "pointer",
+      flex: "0 0 auto",
+      padding: "5px 10px",
+      margin: "15px",
+    },
+    declineButtonStyle: {
+      background: "#c12a2a",
+      border: "0",
+      borderRadius: "0px",
+      boxShadow: "none",
+      color: "#e5e5e5",
+      cursor: "pointer",
+      flex: "0 0 auto",
+      padding: "5px 10px",
+      margin: "15px",
+    },
+    contentStyle: {
+      flex: "1 0 300px",
+      margin: "15px",
+    },
+    overlayStyle: {
+      position: "fixed",
+      left: 0,
+      top: 0,
+      width: "100%",
+      height: "100%",
+      zIndex: "999",
+      backgroundColor: "rgba(0,0,0,0.3)",
+    },
+  };
 
   /**
    * Set a persistent accept cookie
    */
-  accept() {
-    const { cookieName, cookieValue, hideOnAccept, onAccept } = this.props;
-
-    this.setCookie(cookieName, cookieValue);
+  const accept = () => {
+    setCookie(cookieName, cookieValue);
 
     onAccept();
 
     if (hideOnAccept) {
-      this.setState({ visible: false });
+      setVisible(false);
     }
-  }
+  };
 
   /**
    * Set a persistent decline cookie
    */
-  decline() {
-    const {
-      cookieName,
-      declineCookieValue,
-      hideOnDecline,
-      onDecline,
-      setDeclineCookie,
-    } = this.props;
-
+  const decline = () => {
     if (setDeclineCookie) {
-      this.setCookie(cookieName, declineCookieValue);
+      setCookie(cookieName, declineCookieValue);
     }
 
     onDecline();
 
     if (hideOnDecline) {
-      this.setState({ visible: false });
+      setVisible(false);
     }
-  }
+  };
 
   /**
    * Function to set the consent cookie based on the provided variables
    * Sets two cookies to handle incompatible browsers, more details:
    * https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
    */
-  setCookie(cookieName, cookieValue) {
-    const { extraCookieOptions, expires, sameSite } = this.props;
-    let { cookieSecurity } = this.props;
-
+  const setCookie = (cookieName, cookieValue) => {
     if (cookieSecurity === undefined) {
       cookieSecurity = location ? location.protocol === "https:" : true;
     }
 
-    let cookieOptions = { expires, ...extraCookieOptions, sameSite, secure: cookieSecurity };
+    let cookieOptions = {
+      expires,
+      ...extraCookieOptions,
+      sameSite,
+      secure: cookieSecurity,
+    };
 
     // Fallback for older browsers where can not set SameSite=None, SEE: https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
     if (sameSite === SAME_SITE_OPTIONS.NONE) {
@@ -179,134 +198,108 @@ class CookieConsent extends Component {
 
     // set the regular cookie
     Cookies.set(cookieName, cookieValue, cookieOptions);
-  }
+  };
 
   /**
    * Returns the value of the consent cookie
    * Retrieves the regular value first and if not found the legacy one according
    * to: https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
    */
-  getCookieValue() {
-    const { cookieName } = this.props;
+  const getCookieValue = () => {
     return getCookieConsentValue(cookieName);
+  };
+
+  if ((!visible && getCookieValue() === undefined) || debug) {
+    setVisible(true);
   }
 
-  render() {
-    // If the bar shouldn't be visible don't render anything.
-    if (!this.state.visible) {
-      return null;
-    }
+  // If the bar shouldn't be visible don't render anything.
 
-    const {
-      location,
-      style,
-      buttonStyle,
-      declineButtonStyle,
-      contentStyle,
-      disableStyles,
-      buttonText,
-      declineButtonText,
-      containerClasses,
-      contentClasses,
-      buttonClasses,
-      buttonWrapperClasses,
-      declineButtonClasses,
-      buttonId,
-      declineButtonId,
-      disableButtonStyles,
-      enableDeclineButton,
-      flipButtons,
-      ButtonComponent,
-      overlay,
-      overlayClasses,
-      overlayStyle,
-      ariaAcceptLabel,
-      ariaDeclineLabel,
-    } = this.props;
+  let myStyle = {};
+  let myButtonStyle = {};
+  let myDeclineButtonStyle = {};
+  let myContentStyle = {};
+  let myOverlayStyle = {};
 
-    let myStyle = {};
-    let myButtonStyle = {};
-    let myDeclineButtonStyle = {};
-    let myContentStyle = {};
-    let myOverlayStyle = {};
+  if (disableStyles) {
+    // if styles are disabled use the provided styles (or none)
+    myStyle = Object.assign({}, style);
+    myButtonStyle = Object.assign({}, buttonStyle);
+    myDeclineButtonStyle = Object.assign({}, declineButtonStyle);
+    myContentStyle = Object.assign({}, contentStyle);
+    myOverlayStyle = Object.assign({}, overlayStyle);
+  } else {
+    // if styles aren't disabled merge them with the styles that are provided (or use default styles)
+    myStyle = Object.assign({}, { ...state.style, ...style });
+    myContentStyle = Object.assign({}, { ...state.contentStyle, ...contentStyle });
+    myOverlayStyle = Object.assign({}, { ...state.overlayStyle, ...overlayStyle });
 
-    if (disableStyles) {
-      // if styles are disabled use the provided styles (or none)
-      myStyle = Object.assign({}, style);
+    // switch to disable JUST the button styles
+    if (disableButtonStyles) {
       myButtonStyle = Object.assign({}, buttonStyle);
       myDeclineButtonStyle = Object.assign({}, declineButtonStyle);
-      myContentStyle = Object.assign({}, contentStyle);
-      myOverlayStyle = Object.assign({}, overlayStyle);
     } else {
-      // if styles aren't disabled merge them with the styles that are provided (or use default styles)
-      myStyle = Object.assign({}, { ...this.state.style, ...style });
-      myContentStyle = Object.assign({}, { ...this.state.contentStyle, ...contentStyle });
-      myOverlayStyle = Object.assign({}, { ...this.state.overlayStyle, ...overlayStyle });
-
-      // switch to disable JUST the button styles
-      if (disableButtonStyles) {
-        myButtonStyle = Object.assign({}, buttonStyle);
-        myDeclineButtonStyle = Object.assign({}, declineButtonStyle);
-      } else {
-        myButtonStyle = Object.assign({}, { ...this.state.buttonStyle, ...buttonStyle });
-        myDeclineButtonStyle = Object.assign(
-          {},
-          { ...this.state.declineButtonStyle, ...declineButtonStyle }
-        );
-      }
-    }
-
-    // syntactic sugar to enable user to easily select top / bottom
-    switch (location) {
-      case OPTIONS.TOP:
-        myStyle.top = "0";
-        break;
-
-      case OPTIONS.BOTTOM:
-        myStyle.bottom = "0";
-        break;
-    }
-
-    const buttonsToRender = [];
-
-    // add decline button
-    enableDeclineButton &&
-      buttonsToRender.push(
-        <ButtonComponent
-          key="declineButton"
-          style={myDeclineButtonStyle}
-          className={declineButtonClasses}
-          id={declineButtonId}
-          aria-label={ariaDeclineLabel}
-          onClick={() => {
-            this.decline();
-          }}
-        >
-          {declineButtonText}
-        </ButtonComponent>
+      myButtonStyle = Object.assign({}, { ...state.buttonStyle, ...buttonStyle });
+      myDeclineButtonStyle = Object.assign(
+        {},
+        { ...state.declineButtonStyle, ...declineButtonStyle }
       );
+    }
+  }
 
-    // add accept button
+  // syntactic sugar to enable user to easily select top / bottom
+  switch (location) {
+    case OPTIONS.TOP:
+      myStyle.top = "0";
+      break;
+
+    case OPTIONS.BOTTOM:
+    default:
+      myStyle.bottom = "0";
+      break;
+  }
+
+  const buttonsToRender = [];
+
+  // add decline button
+  enableDeclineButton &&
     buttonsToRender.push(
       <ButtonComponent
-        key="acceptButton"
-        style={myButtonStyle}
-        className={buttonClasses}
-        id={buttonId}
-        aria-label={ariaAcceptLabel}
+        key="declineButton"
+        style={myDeclineButtonStyle}
+        className={declineButtonClasses}
+        id={declineButtonId}
+        aria-label={ariaDeclineLabel}
         onClick={() => {
-          this.accept();
+          decline();
         }}
       >
-        {buttonText}
+        {declineButtonText}
       </ButtonComponent>
     );
 
-    if (flipButtons) {
-      buttonsToRender.reverse();
-    }
+  // add accept button
+  buttonsToRender.push(
+    <ButtonComponent
+      key="acceptButton"
+      style={myButtonStyle}
+      className={buttonClasses}
+      id={buttonId}
+      aria-label={ariaAcceptLabel}
+      onClick={() => {
+        accept();
+      }}
+    >
+      {buttonText}
+    </ButtonComponent>
+  );
 
-    return (
+  if (flipButtons) {
+    buttonsToRender.reverse();
+  }
+
+  return (
+    visible && (
       <ConditionalWrapper
         condition={overlay}
         wrapper={(children) => (
@@ -317,7 +310,7 @@ class CookieConsent extends Component {
       >
         <div className={`${containerClasses}`} style={myStyle}>
           <div style={myContentStyle} className={contentClasses}>
-            {this.props.children}
+            {children}
           </div>
           <div className={`${buttonWrapperClasses}`}>
             {buttonsToRender.map((button) => {
@@ -326,8 +319,8 @@ class CookieConsent extends Component {
           </div>
         </div>
       </ConditionalWrapper>
-    );
-  }
+    )
+  );
 }
 
 CookieConsent.propTypes = {
@@ -370,40 +363,3 @@ CookieConsent.propTypes = {
   ariaAcceptLabel: PropTypes.string,
   ariaDeclineLabel: PropTypes.string,
 };
-
-CookieConsent.defaultProps = {
-  disableStyles: false,
-  hideOnAccept: true,
-  hideOnDecline: true,
-  location: OPTIONS.BOTTOM,
-  onAccept: () => {},
-  onDecline: () => {},
-  cookieName: defaultCookieConsentName,
-  cookieValue: true,
-  declineCookieValue: false,
-  setDeclineCookie: true,
-  buttonText: "I understand",
-  declineButtonText: "I decline",
-  debug: false,
-  expires: 365,
-  containerClasses: "CookieConsent",
-  contentClasses: "",
-  buttonClasses: "",
-  buttonWrapperClasses: "",
-  declineButtonClasses: "",
-  buttonId: "rcc-confirm-button",
-  declineButtonId: "rcc-decline-button",
-  extraCookieOptions: {},
-  disableButtonStyles: false,
-  enableDeclineButton: false,
-  flipButtons: false,
-  sameSite: SAME_SITE_OPTIONS.LAX,
-  ButtonComponent: ({ children, ...props }) => <button {...props}>{children}</button>,
-  overlay: false,
-  overlayClasses: "",
-  ariaAcceptLabel: "Accept cookies",
-  ariaDeclineLabel: "Decline cookies",
-};
-
-export default CookieConsent;
-export { Cookies };

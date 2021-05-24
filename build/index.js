@@ -1,605 +1,88 @@
 /*! For license information please see index.js.LICENSE.txt */
-module.exports = (function () {
+!(function () {
   var e = {
-      866: function (e, t, n) {
-        "use strict";
-        n.r(t),
-          n.d(t, {
-            Cookies: function () {
-              return s();
-            },
-            OPTIONS: function () {
-              return h;
-            },
-            SAME_SITE_OPTIONS: function () {
-              return m;
-            },
-            default: function () {
-              return j;
-            },
-            getCookieConsentValue: function () {
-              return g;
-            },
-          });
-        const o = require("react");
-        var r = n.n(o),
-          i = n(697),
-          c = n.n(i),
-          a = n(808),
-          s = n.n(a);
-        function l(e) {
-          return (l =
-            "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
-              ? function (e) {
-                  return typeof e;
-                }
-              : function (e) {
-                  return e &&
-                    "function" == typeof Symbol &&
-                    e.constructor === Symbol &&
-                    e !== Symbol.prototype
-                    ? "symbol"
-                    : typeof e;
-                })(e);
-        }
-        function u() {
-          return (u =
-            Object.assign ||
-            function (e) {
-              for (var t = 1; t < arguments.length; t++) {
-                var n = arguments[t];
-                for (var o in n) Object.prototype.hasOwnProperty.call(n, o) && (e[o] = n[o]);
-              }
-              return e;
-            }).apply(this, arguments);
-        }
-        function p(e, t) {
-          var n = Object.keys(e);
-          if (Object.getOwnPropertySymbols) {
-            var o = Object.getOwnPropertySymbols(e);
-            t &&
-              (o = o.filter(function (t) {
-                return Object.getOwnPropertyDescriptor(e, t).enumerable;
-              })),
-              n.push.apply(n, o);
-          }
-          return n;
-        }
-        function f(e) {
-          for (var t = 1; t < arguments.length; t++) {
-            var n = null != arguments[t] ? arguments[t] : {};
-            t % 2
-              ? p(Object(n), !0).forEach(function (t) {
-                  b(e, t, n[t]);
-                })
-              : Object.getOwnPropertyDescriptors
-              ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n))
-              : p(Object(n)).forEach(function (t) {
-                  Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t));
-                });
-          }
-          return e;
-        }
-        function b(e, t, n) {
-          return (
-            t in e
-              ? Object.defineProperty(e, t, {
-                  value: n,
-                  enumerable: !0,
-                  configurable: !0,
-                  writable: !0,
-                })
-              : (e[t] = n),
-            e
-          );
-        }
-        function y(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            (o.enumerable = o.enumerable || !1),
-              (o.configurable = !0),
-              "value" in o && (o.writable = !0),
-              Object.defineProperty(e, o.key, o);
-          }
-        }
-        function d(e, t) {
-          return (d =
-            Object.setPrototypeOf ||
-            function (e, t) {
-              return (e.__proto__ = t), e;
-            })(e, t);
-        }
-        function v(e, t) {
-          return !t || ("object" !== l(t) && "function" != typeof t)
-            ? (function (e) {
-                if (void 0 === e)
-                  throw new ReferenceError(
-                    "this hasn't been initialised - super() hasn't been called"
-                  );
-                return e;
-              })(e)
-            : t;
-        }
-        function O(e) {
-          return (O = Object.setPrototypeOf
-            ? Object.getPrototypeOf
-            : function (e) {
-                return e.__proto__ || Object.getPrototypeOf(e);
-              })(e);
-        }
-        var h = { TOP: "top", BOTTOM: "bottom", NONE: "none" },
-          m = { STRICT: "strict", LAX: "lax", NONE: "none" },
-          g = function () {
-            var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : C,
-              t = s().get(e);
-            return void 0 === t && (t = s().get(S(e))), t;
-          },
-          S = function (e) {
-            return "".concat(e, "-legacy");
-          },
-          C = "CookieConsent",
-          k = function (e) {
-            var t = e.condition,
-              n = e.wrapper,
-              o = e.children;
-            return t ? n(o) : o;
-          },
-          x = (function (e) {
-            !(function (e, t) {
-              if ("function" != typeof t && null !== t)
-                throw new TypeError("Super expression must either be null or a function");
-              (e.prototype = Object.create(t && t.prototype, {
-                constructor: { value: e, writable: !0, configurable: !0 },
-              })),
-                t && d(e, t);
-            })(a, e);
-            var t,
-              n,
-              o,
-              i,
-              c =
-                ((o = a),
-                (i = (function () {
-                  if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
-                  if (Reflect.construct.sham) return !1;
-                  if ("function" == typeof Proxy) return !0;
-                  try {
-                    return (
-                      Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0
-                    );
-                  } catch (e) {
-                    return !1;
-                  }
-                })()),
-                function () {
-                  var e,
-                    t = O(o);
-                  if (i) {
-                    var n = O(this).constructor;
-                    e = Reflect.construct(t, arguments, n);
-                  } else e = t.apply(this, arguments);
-                  return v(this, e);
-                });
-            function a(e) {
-              var t;
-              return (
-                (function (e, t) {
-                  if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
-                })(this, a),
-                ((t = c.call(this, e)).state = {
-                  visible: !1,
-                  style: {
-                    alignItems: "baseline",
-                    background: "#353535",
-                    color: "white",
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                    left: "0",
-                    position: "fixed",
-                    width: "100%",
-                    zIndex: "999",
-                  },
-                  buttonStyle: {
-                    background: "#ffd42d",
-                    border: "0",
-                    borderRadius: "0px",
-                    boxShadow: "none",
-                    color: "black",
-                    cursor: "pointer",
-                    flex: "0 0 auto",
-                    padding: "5px 10px",
-                    margin: "15px",
-                  },
-                  declineButtonStyle: {
-                    background: "#c12a2a",
-                    border: "0",
-                    borderRadius: "0px",
-                    boxShadow: "none",
-                    color: "#e5e5e5",
-                    cursor: "pointer",
-                    flex: "0 0 auto",
-                    padding: "5px 10px",
-                    margin: "15px",
-                  },
-                  contentStyle: { flex: "1 0 300px", margin: "15px" },
-                  overlayStyle: {
-                    position: "fixed",
-                    left: 0,
-                    top: 0,
-                    width: "100%",
-                    height: "100%",
-                    zIndex: "999",
-                    backgroundColor: "rgba(0,0,0,0.3)",
-                  },
-                }),
-                t
-              );
-            }
-            return (
-              (t = a),
-              (n = [
-                {
-                  key: "componentDidMount",
-                  value: function () {
-                    var e = this.props.debug;
-                    (void 0 === this.getCookieValue() || e) && this.setState({ visible: !0 });
-                  },
-                },
-                {
-                  key: "accept",
-                  value: function () {
-                    var e = this.props,
-                      t = e.cookieName,
-                      n = e.cookieValue,
-                      o = e.hideOnAccept,
-                      r = e.onAccept;
-                    this.setCookie(t, n), r(), o && this.setState({ visible: !1 });
-                  },
-                },
-                {
-                  key: "decline",
-                  value: function () {
-                    var e = this.props,
-                      t = e.cookieName,
-                      n = e.declineCookieValue,
-                      o = e.hideOnDecline,
-                      r = e.onDecline;
-                    e.setDeclineCookie && this.setCookie(t, n),
-                      r(),
-                      o && this.setState({ visible: !1 });
-                  },
-                },
-                {
-                  key: "setCookie",
-                  value: function (e, t) {
-                    var n = this.props,
-                      o = n.extraCookieOptions,
-                      r = n.expires,
-                      i = n.sameSite,
-                      c = this.props.cookieSecurity;
-                    void 0 === c && (c = !location || "https:" === location.protocol);
-                    var a = f(f({ expires: r }, o), {}, { sameSite: i, secure: c });
-                    i === m.NONE && s().set(S(e), t, a), s().set(e, t, a);
-                  },
-                },
-                {
-                  key: "getCookieValue",
-                  value: function () {
-                    var e = this.props.cookieName;
-                    return g(e);
-                  },
-                },
-                {
-                  key: "render",
-                  value: function () {
-                    var e = this;
-                    if (!this.state.visible) return null;
-                    var t = this.props,
-                      n = t.location,
-                      o = t.style,
-                      i = t.buttonStyle,
-                      c = t.declineButtonStyle,
-                      a = t.contentStyle,
-                      s = t.disableStyles,
-                      l = t.buttonText,
-                      p = t.declineButtonText,
-                      b = t.containerClasses,
-                      y = t.contentClasses,
-                      d = t.buttonClasses,
-                      v = t.buttonWrapperClasses,
-                      O = t.declineButtonClasses,
-                      m = t.buttonId,
-                      g = t.declineButtonId,
-                      S = t.disableButtonStyles,
-                      C = t.enableDeclineButton,
-                      x = t.flipButtons,
-                      j = t.ButtonComponent,
-                      T = t.overlay,
-                      w = t.overlayClasses,
-                      B = t.overlayStyle,
-                      P = t.ariaAcceptLabel,
-                      D = t.ariaDeclineLabel,
-                      E = {},
-                      I = {},
-                      N = {},
-                      _ = {},
-                      R = {};
-                    switch (
-                      (s
-                        ? ((E = u({}, o)),
-                          (I = u({}, i)),
-                          (N = u({}, c)),
-                          (_ = u({}, a)),
-                          (R = u({}, B)))
-                        : ((E = u({}, f(f({}, this.state.style), o))),
-                          (_ = u({}, f(f({}, this.state.contentStyle), a))),
-                          (R = u({}, f(f({}, this.state.overlayStyle), B))),
-                          S
-                            ? ((I = u({}, i)), (N = u({}, c)))
-                            : ((I = u({}, f(f({}, this.state.buttonStyle), i))),
-                              (N = u({}, f(f({}, this.state.declineButtonStyle), c))))),
-                      n)
-                    ) {
-                      case h.TOP:
-                        E.top = "0";
-                        break;
-                      case h.BOTTOM:
-                        E.bottom = "0";
-                    }
-                    var A = [];
-                    return (
-                      C &&
-                        A.push(
-                          r().createElement(
-                            j,
-                            {
-                              key: "declineButton",
-                              style: N,
-                              className: O,
-                              id: g,
-                              "aria-label": D,
-                              onClick: function () {
-                                e.decline();
-                              },
-                            },
-                            p
-                          )
-                        ),
-                      A.push(
-                        r().createElement(
-                          j,
-                          {
-                            key: "acceptButton",
-                            style: I,
-                            className: d,
-                            id: m,
-                            "aria-label": P,
-                            onClick: function () {
-                              e.accept();
-                            },
-                          },
-                          l
-                        )
-                      ),
-                      x && A.reverse(),
-                      r().createElement(
-                        k,
-                        {
-                          condition: T,
-                          wrapper: function (e) {
-                            return r().createElement("div", { style: R, className: w }, e);
-                          },
-                        },
-                        r().createElement(
-                          "div",
-                          { className: "".concat(b), style: E },
-                          r().createElement("div", { style: _, className: y }, this.props.children),
-                          r().createElement(
-                            "div",
-                            { className: "".concat(v) },
-                            A.map(function (e) {
-                              return e;
-                            })
-                          )
-                        )
-                      )
-                    );
-                  },
-                },
-              ]) && y(t.prototype, n),
-              a
-            );
-          })(o.Component);
-        (x.propTypes = {
-          location: c().oneOf(
-            Object.keys(h).map(function (e) {
-              return h[e];
-            })
-          ),
-          sameSite: c().oneOf(
-            Object.keys(m).map(function (e) {
-              return m[e];
-            })
-          ),
-          style: c().object,
-          buttonStyle: c().object,
-          declineButtonStyle: c().object,
-          contentStyle: c().object,
-          children: c().any,
-          disableStyles: c().bool,
-          hideOnAccept: c().bool,
-          hideOnDecline: c().bool,
-          onAccept: c().func,
-          onDecline: c().func,
-          buttonText: c().oneOfType([c().string, c().func, c().element]),
-          declineButtonText: c().oneOfType([c().string, c().func, c().element]),
-          cookieName: c().string,
-          cookieValue: c().oneOfType([c().string, c().bool, c().number]),
-          declineCookieValue: c().oneOfType([c().string, c().bool, c().number]),
-          setDeclineCookie: c().bool,
-          debug: c().bool,
-          expires: c().number,
-          containerClasses: c().string,
-          contentClasses: c().string,
-          buttonClasses: c().string,
-          buttonWrapperClasses: c().string,
-          declineButtonClasses: c().string,
-          buttonId: c().string,
-          declineButtonId: c().string,
-          extraCookieOptions: c().object,
-          disableButtonStyles: c().bool,
-          enableDeclineButton: c().bool,
-          flipButtons: c().bool,
-          ButtonComponent: c().elementType,
-          cookieSecurity: c().bool,
-          overlay: c().bool,
-          overlayClasses: c().string,
-          overlayStyle: c().object,
-          ariaAcceptLabel: c().string,
-          ariaDeclineLabel: c().string,
-        }),
-          (x.defaultProps = {
-            disableStyles: !1,
-            hideOnAccept: !0,
-            hideOnDecline: !0,
-            location: h.BOTTOM,
-            onAccept: function () {},
-            onDecline: function () {},
-            cookieName: C,
-            cookieValue: !0,
-            declineCookieValue: !1,
-            setDeclineCookie: !0,
-            buttonText: "I understand",
-            declineButtonText: "I decline",
-            debug: !1,
-            expires: 365,
-            containerClasses: "CookieConsent",
-            contentClasses: "",
-            buttonClasses: "",
-            buttonWrapperClasses: "",
-            declineButtonClasses: "",
-            buttonId: "rcc-confirm-button",
-            declineButtonId: "rcc-decline-button",
-            extraCookieOptions: {},
-            disableButtonStyles: !1,
-            enableDeclineButton: !1,
-            flipButtons: !1,
-            sameSite: m.LAX,
-            ButtonComponent: function (e) {
-              var t = e.children,
-                n = (function (e, t) {
-                  if (null == e) return {};
-                  var n,
-                    o,
-                    r = (function (e, t) {
-                      if (null == e) return {};
-                      var n,
-                        o,
-                        r = {},
-                        i = Object.keys(e);
-                      for (o = 0; o < i.length; o++) (n = i[o]), t.indexOf(n) >= 0 || (r[n] = e[n]);
-                      return r;
-                    })(e, t);
-                  if (Object.getOwnPropertySymbols) {
-                    var i = Object.getOwnPropertySymbols(e);
-                    for (o = 0; o < i.length; o++)
-                      (n = i[o]),
-                        t.indexOf(n) >= 0 ||
-                          (Object.prototype.propertyIsEnumerable.call(e, n) && (r[n] = e[n]));
-                  }
-                  return r;
-                })(e, ["children"]);
-              return r().createElement("button", n, t);
-            },
-            overlay: !1,
-            overlayClasses: "",
-            ariaAcceptLabel: "Accept cookies",
-            ariaDeclineLabel: "Decline cookies",
-          });
-        const j = x;
-      },
       808: function (e, t, n) {
         var o, r, i;
         void 0 ===
           (r =
             "function" ==
-            typeof (o = i = function () {
-              function e() {
-                for (var e = 0, t = {}; e < arguments.length; e++) {
-                  var n = arguments[e];
-                  for (var o in n) t[o] = n[o];
-                }
-                return t;
-              }
-              function t(e) {
-                return e.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
-              }
-              return (function n(o) {
-                function r() {}
-                function i(t, n, i) {
-                  if ("undefined" != typeof document) {
-                    "number" == typeof (i = e({ path: "/" }, r.defaults, i)).expires &&
-                      (i.expires = new Date(1 * new Date() + 864e5 * i.expires)),
-                      (i.expires = i.expires ? i.expires.toUTCString() : "");
-                    try {
-                      var c = JSON.stringify(n);
-                      /^[\{\[]/.test(c) && (n = c);
-                    } catch (e) {}
-                    (n = o.write
-                      ? o.write(n, t)
-                      : encodeURIComponent(String(n)).replace(
-                          /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
-                          decodeURIComponent
-                        )),
-                      (t = encodeURIComponent(String(t))
-                        .replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
-                        .replace(/[\(\)]/g, escape));
-                    var a = "";
-                    for (var s in i)
-                      i[s] && ((a += "; " + s), !0 !== i[s] && (a += "=" + i[s].split(";")[0]));
-                    return (document.cookie = t + "=" + n + a);
+            typeof (o = i =
+              function () {
+                function e() {
+                  for (var e = 0, t = {}; e < arguments.length; e++) {
+                    var n = arguments[e];
+                    for (var o in n) t[o] = n[o];
                   }
+                  return t;
                 }
-                function c(e, n) {
-                  if ("undefined" != typeof document) {
-                    for (
-                      var r = {}, i = document.cookie ? document.cookie.split("; ") : [], c = 0;
-                      c < i.length;
-                      c++
-                    ) {
-                      var a = i[c].split("="),
-                        s = a.slice(1).join("=");
-                      n || '"' !== s.charAt(0) || (s = s.slice(1, -1));
+                function t(e) {
+                  return e.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
+                }
+                return (function n(o) {
+                  function r() {}
+                  function i(t, n, i) {
+                    if ("undefined" != typeof document) {
+                      "number" == typeof (i = e({ path: "/" }, r.defaults, i)).expires &&
+                        (i.expires = new Date(1 * new Date() + 864e5 * i.expires)),
+                        (i.expires = i.expires ? i.expires.toUTCString() : "");
                       try {
-                        var l = t(a[0]);
-                        if (((s = (o.read || o)(s, l) || t(s)), n))
-                          try {
-                            s = JSON.parse(s);
-                          } catch (e) {}
-                        if (((r[l] = s), e === l)) break;
+                        var c = JSON.stringify(n);
+                        /^[\{\[]/.test(c) && (n = c);
                       } catch (e) {}
+                      (n = o.write
+                        ? o.write(n, t)
+                        : encodeURIComponent(String(n)).replace(
+                            /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
+                            decodeURIComponent
+                          )),
+                        (t = encodeURIComponent(String(t))
+                          .replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
+                          .replace(/[\(\)]/g, escape));
+                      var a = "";
+                      for (var l in i)
+                        i[l] && ((a += "; " + l), !0 !== i[l] && (a += "=" + i[l].split(";")[0]));
+                      return (document.cookie = t + "=" + n + a);
                     }
-                    return e ? r[e] : r;
                   }
-                }
-                return (
-                  (r.set = i),
-                  (r.get = function (e) {
-                    return c(e, !1);
-                  }),
-                  (r.getJSON = function (e) {
-                    return c(e, !0);
-                  }),
-                  (r.remove = function (t, n) {
-                    i(t, "", e(n, { expires: -1 }));
-                  }),
-                  (r.defaults = {}),
-                  (r.withConverter = n),
-                  r
-                );
-              })(function () {});
-            })
+                  function c(e, n) {
+                    if ("undefined" != typeof document) {
+                      for (
+                        var r = {}, i = document.cookie ? document.cookie.split("; ") : [], c = 0;
+                        c < i.length;
+                        c++
+                      ) {
+                        var a = i[c].split("="),
+                          l = a.slice(1).join("=");
+                        n || '"' !== l.charAt(0) || (l = l.slice(1, -1));
+                        try {
+                          var u = t(a[0]);
+                          if (((l = (o.read || o)(l, u) || t(l)), n))
+                            try {
+                              l = JSON.parse(l);
+                            } catch (e) {}
+                          if (((r[u] = l), e === u)) break;
+                        } catch (e) {}
+                      }
+                      return e ? r[e] : r;
+                    }
+                  }
+                  return (
+                    (r.set = i),
+                    (r.get = function (e) {
+                      return c(e, !1);
+                    }),
+                    (r.getJSON = function (e) {
+                      return c(e, !0);
+                    }),
+                    (r.remove = function (t, n) {
+                      i(t, "", e(n, { expires: -1 }));
+                    }),
+                    (r.defaults = {}),
+                    (r.withConverter = n),
+                    r
+                  );
+                })(function () {});
+              })
               ? o.call(t, n, t, e)
               : o) || (e.exports = r),
           (e.exports = i());
@@ -658,22 +141,22 @@ module.exports = (function () {
     },
     t = {};
   function n(o) {
-    if (t[o]) return t[o].exports;
-    var r = (t[o] = { exports: {} });
-    return e[o](r, r.exports, n), r.exports;
+    var r = t[o];
+    if (void 0 !== r) return r.exports;
+    var i = (t[o] = { exports: {} });
+    return e[o](i, i.exports, n), i.exports;
   }
-  return (
-    (n.n = function (e) {
-      var t =
-        e && e.__esModule
-          ? function () {
-              return e.default;
-            }
-          : function () {
-              return e;
-            };
-      return n.d(t, { a: t }), t;
-    }),
+  (n.n = function (e) {
+    var t =
+      e && e.__esModule
+        ? function () {
+            return e.default;
+          }
+        : function () {
+            return e;
+          };
+    return n.d(t, { a: t }), t;
+  }),
     (n.d = function (e, t) {
       for (var o in t)
         n.o(t, o) && !n.o(e, o) && Object.defineProperty(e, o, { enumerable: !0, get: t[o] });
@@ -686,7 +169,482 @@ module.exports = (function () {
         Symbol.toStringTag &&
         Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
         Object.defineProperty(e, "__esModule", { value: !0 });
-    }),
-    n(866)
-  );
+    });
+  var o = {};
+  !(function () {
+    "use strict";
+    n.r(o),
+      n.d(o, {
+        CookieConsent: function () {
+          return g;
+        },
+        OPTIONS: function () {
+          return f;
+        },
+        SAME_SITE_OPTIONS: function () {
+          return b;
+        },
+        getCookieConsentValue: function () {
+          return y;
+        },
+      });
+    const e = require("react");
+    var t = n.n(e),
+      r = n(697),
+      i = n.n(r),
+      c = n(808),
+      a = n.n(c);
+    function l() {
+      return (l =
+        Object.assign ||
+        function (e) {
+          for (var t = 1; t < arguments.length; t++) {
+            var n = arguments[t];
+            for (var o in n) Object.prototype.hasOwnProperty.call(n, o) && (e[o] = n[o]);
+          }
+          return e;
+        }).apply(this, arguments);
+    }
+    function u(e, t) {
+      var n = Object.keys(e);
+      if (Object.getOwnPropertySymbols) {
+        var o = Object.getOwnPropertySymbols(e);
+        t &&
+          (o = o.filter(function (t) {
+            return Object.getOwnPropertyDescriptor(e, t).enumerable;
+          })),
+          n.push.apply(n, o);
+      }
+      return n;
+    }
+    function s(e) {
+      for (var t = 1; t < arguments.length; t++) {
+        var n = null != arguments[t] ? arguments[t] : {};
+        t % 2
+          ? u(Object(n), !0).forEach(function (t) {
+              p(e, t, n[t]);
+            })
+          : Object.getOwnPropertyDescriptors
+          ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n))
+          : u(Object(n)).forEach(function (t) {
+              Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t));
+            });
+      }
+      return e;
+    }
+    function p(e, t, n) {
+      return (
+        t in e
+          ? Object.defineProperty(e, t, {
+              value: n,
+              enumerable: !0,
+              configurable: !0,
+              writable: !0,
+            })
+          : (e[t] = n),
+        e
+      );
+    }
+    function d(e, t) {
+      (null == t || t > e.length) && (t = e.length);
+      for (var n = 0, o = new Array(t); n < t; n++) o[n] = e[n];
+      return o;
+    }
+    var f = { TOP: "top", BOTTOM: "bottom", NONE: "none" },
+      b = { STRICT: "strict", LAX: "lax", NONE: "none" },
+      y = function () {
+        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : m,
+          t = a().get(e);
+        return void 0 === t && (t = a().get(v(e))), t;
+      },
+      v = function (e) {
+        return "".concat(e, "-legacy");
+      },
+      m = "CookieConsent",
+      O = function (e) {
+        var t = e.condition,
+          n = e.wrapper,
+          o = e.children;
+        return t ? n(o) : o;
+      };
+    function g(n) {
+      var o,
+        r,
+        i = n.disableStyles,
+        c = void 0 !== i && i,
+        u = n.hideOnAccept,
+        p = void 0 === u || u,
+        g = n.hideOnDecline,
+        h = void 0 === g || g,
+        x = n.location,
+        S = void 0 === x ? f.BOTTOM : x,
+        C = n.onAccept,
+        k = void 0 === C ? function () {} : C,
+        j = n.onDecline,
+        T = void 0 === j ? function () {} : j,
+        w = n.cookieName,
+        B = void 0 === w ? m : w,
+        I = n.cookieValue,
+        P = void 0 === I || I,
+        E = n.declineCookieValue,
+        D = void 0 !== E && E,
+        A = n.setDeclineCookie,
+        N = void 0 === A || A,
+        _ = n.buttonText,
+        R = void 0 === _ ? "I understand" : _,
+        U = n.declineButtonText,
+        L = void 0 === U ? "I decline" : U,
+        M = n.debug,
+        V = void 0 !== M && M,
+        W = n.expires,
+        F = void 0 === W ? 365 : W,
+        J = n.containerClasses,
+        q = void 0 === J ? "CookieConsent" : J,
+        z = n.contentClasses,
+        X = void 0 === z ? "" : z,
+        H = n.buttonClasses,
+        Y = void 0 === H ? "" : H,
+        Z = n.buttonWrapperClasses,
+        $ = void 0 === Z ? "" : Z,
+        G = n.declineButtonClasses,
+        K = void 0 === G ? "" : G,
+        Q = n.buttonId,
+        ee = void 0 === Q ? "rcc-confirm-button" : Q,
+        te = n.declineButtonId,
+        ne = void 0 === te ? "rcc-decline-button" : te,
+        oe = n.extraCookieOptions,
+        re = void 0 === oe ? {} : oe,
+        ie = n.disableButtonStyles,
+        ce = void 0 !== ie && ie,
+        ae = n.enableDeclineButton,
+        le = void 0 !== ae && ae,
+        ue = n.flipButtons,
+        se = void 0 !== ue && ue,
+        pe = n.sameSite,
+        de = void 0 === pe ? b.LAX : pe,
+        fe = n.ButtonComponent,
+        be =
+          void 0 === fe
+            ? function (e) {
+                var n = e.children,
+                  o = (function (e, t) {
+                    if (null == e) return {};
+                    var n,
+                      o,
+                      r = (function (e, t) {
+                        if (null == e) return {};
+                        var n,
+                          o,
+                          r = {},
+                          i = Object.keys(e);
+                        for (o = 0; o < i.length; o++)
+                          (n = i[o]), t.indexOf(n) >= 0 || (r[n] = e[n]);
+                        return r;
+                      })(e, t);
+                    if (Object.getOwnPropertySymbols) {
+                      var i = Object.getOwnPropertySymbols(e);
+                      for (o = 0; o < i.length; o++)
+                        (n = i[o]),
+                          t.indexOf(n) >= 0 ||
+                            (Object.prototype.propertyIsEnumerable.call(e, n) && (r[n] = e[n]));
+                    }
+                    return r;
+                  })(e, ["children"]);
+                return t().createElement("button", o, n);
+              }
+            : fe,
+        ye = n.overlay,
+        ve = void 0 !== ye && ye,
+        me = n.overlayClasses,
+        Oe = void 0 === me ? "" : me,
+        ge = n.ariaAcceptLabel,
+        he = void 0 === ge ? "Accept cookies" : ge,
+        xe = n.ariaDeclineLabel,
+        Se = void 0 === xe ? "Decline cookies" : xe,
+        Ce = n.style,
+        ke = void 0 === Ce ? {} : Ce,
+        je = n.contentStyle,
+        Te = void 0 === je ? {} : je,
+        we = n.buttonStyle,
+        Be = void 0 === we ? {} : we,
+        Ie = n.overlayStyle,
+        Pe = void 0 === Ie ? {} : Ie,
+        Ee = n.declineButtonStyle,
+        De = void 0 === Ee ? {} : Ee,
+        Ae = n.children,
+        Ne = void 0 === Ae ? {} : Ae,
+        _e = n.cookieSecurity,
+        Re =
+          ((o = (0, e.useState)(!1)),
+          (r = 2),
+          (function (e) {
+            if (Array.isArray(e)) return e;
+          })(o) ||
+            (function (e, t) {
+              var n =
+                e && (("undefined" != typeof Symbol && e[Symbol.iterator]) || e["@@iterator"]);
+              if (null != n) {
+                var o,
+                  r,
+                  i = [],
+                  c = !0,
+                  a = !1;
+                try {
+                  for (
+                    n = n.call(e);
+                    !(c = (o = n.next()).done) && (i.push(o.value), !t || i.length !== t);
+                    c = !0
+                  );
+                } catch (e) {
+                  (a = !0), (r = e);
+                } finally {
+                  try {
+                    c || null == n.return || n.return();
+                  } finally {
+                    if (a) throw r;
+                  }
+                }
+                return i;
+              }
+            })(o, r) ||
+            (function (e, t) {
+              if (e) {
+                if ("string" == typeof e) return d(e, t);
+                var n = Object.prototype.toString.call(e).slice(8, -1);
+                return (
+                  "Object" === n && e.constructor && (n = e.constructor.name),
+                  "Map" === n || "Set" === n
+                    ? Array.from(e)
+                    : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
+                    ? d(e, t)
+                    : void 0
+                );
+              }
+            })(o, r) ||
+            (function () {
+              throw new TypeError(
+                "Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+              );
+            })()),
+        Ue = Re[0],
+        Le = Re[1],
+        Me = function (e, t) {
+          void 0 === _e && (_e = !S || "https:" === S.protocol);
+          var n = s(s({ expires: F }, re), {}, { sameSite: de, secure: _e });
+          de === b.NONE && a().set(v(e), t, n), a().set(e, t, n);
+        };
+      ((!Ue && void 0 === y(B)) || V) && Le(!0);
+      var Ve = {},
+        We = {},
+        Fe = {},
+        Je = {},
+        qe = {};
+      switch (
+        (c
+          ? ((Ve = l({}, ke)),
+            (We = l({}, Be)),
+            (Fe = l({}, De)),
+            (Je = l({}, Te)),
+            (qe = l({}, Pe)))
+          : ((Ve = l(
+              {},
+              s(
+                s(
+                  {},
+                  {
+                    alignItems: "baseline",
+                    background: "#353535",
+                    color: "white",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    left: "0",
+                    position: "fixed",
+                    width: "100%",
+                    zIndex: "999",
+                  }
+                ),
+                ke
+              )
+            )),
+            (Je = l({}, s(s({}, { flex: "1 0 300px", margin: "15px" }), Te))),
+            (qe = l(
+              {},
+              s(
+                s(
+                  {},
+                  {
+                    position: "fixed",
+                    left: 0,
+                    top: 0,
+                    width: "100%",
+                    height: "100%",
+                    zIndex: "999",
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                  }
+                ),
+                Pe
+              )
+            )),
+            ce
+              ? ((We = l({}, Be)), (Fe = l({}, De)))
+              : ((We = l(
+                  {},
+                  s(
+                    s(
+                      {},
+                      {
+                        background: "#ffd42d",
+                        border: "0",
+                        borderRadius: "0px",
+                        boxShadow: "none",
+                        color: "black",
+                        cursor: "pointer",
+                        flex: "0 0 auto",
+                        padding: "5px 10px",
+                        margin: "15px",
+                      }
+                    ),
+                    Be
+                  )
+                )),
+                (Fe = l(
+                  {},
+                  s(
+                    s(
+                      {},
+                      {
+                        background: "#c12a2a",
+                        border: "0",
+                        borderRadius: "0px",
+                        boxShadow: "none",
+                        color: "#e5e5e5",
+                        cursor: "pointer",
+                        flex: "0 0 auto",
+                        padding: "5px 10px",
+                        margin: "15px",
+                      }
+                    ),
+                    De
+                  )
+                )))),
+        S)
+      ) {
+        case f.TOP:
+          Ve.top = "0";
+          break;
+        case f.BOTTOM:
+        default:
+          Ve.bottom = "0";
+      }
+      var ze = [];
+      return (
+        le &&
+          ze.push(
+            t().createElement(
+              be,
+              {
+                key: "declineButton",
+                style: Fe,
+                className: K,
+                id: ne,
+                "aria-label": Se,
+                onClick: function () {
+                  N && Me(B, D), T(), h && Le(!1);
+                },
+              },
+              L
+            )
+          ),
+        ze.push(
+          t().createElement(
+            be,
+            {
+              key: "acceptButton",
+              style: We,
+              className: Y,
+              id: ee,
+              "aria-label": he,
+              onClick: function () {
+                Me(B, P), k(), p && Le(!1);
+              },
+            },
+            R
+          )
+        ),
+        se && ze.reverse(),
+        Ue &&
+          t().createElement(
+            O,
+            {
+              condition: ve,
+              wrapper: function (e) {
+                return t().createElement("div", { style: qe, className: Oe }, e);
+              },
+            },
+            t().createElement(
+              "div",
+              { className: "".concat(q), style: Ve },
+              t().createElement("div", { style: Je, className: X }, Ne),
+              t().createElement(
+                "div",
+                { className: "".concat($) },
+                ze.map(function (e) {
+                  return e;
+                })
+              )
+            )
+          )
+      );
+    }
+    g.propTypes = {
+      location: i().oneOf(
+        Object.keys(f).map(function (e) {
+          return f[e];
+        })
+      ),
+      sameSite: i().oneOf(
+        Object.keys(b).map(function (e) {
+          return b[e];
+        })
+      ),
+      style: i().object,
+      buttonStyle: i().object,
+      declineButtonStyle: i().object,
+      contentStyle: i().object,
+      children: i().any,
+      disableStyles: i().bool,
+      hideOnAccept: i().bool,
+      hideOnDecline: i().bool,
+      onAccept: i().func,
+      onDecline: i().func,
+      buttonText: i().oneOfType([i().string, i().func, i().element]),
+      declineButtonText: i().oneOfType([i().string, i().func, i().element]),
+      cookieName: i().string,
+      cookieValue: i().oneOfType([i().string, i().bool, i().number]),
+      declineCookieValue: i().oneOfType([i().string, i().bool, i().number]),
+      setDeclineCookie: i().bool,
+      debug: i().bool,
+      expires: i().number,
+      containerClasses: i().string,
+      contentClasses: i().string,
+      buttonClasses: i().string,
+      buttonWrapperClasses: i().string,
+      declineButtonClasses: i().string,
+      buttonId: i().string,
+      declineButtonId: i().string,
+      extraCookieOptions: i().object,
+      disableButtonStyles: i().bool,
+      enableDeclineButton: i().bool,
+      flipButtons: i().bool,
+      ButtonComponent: i().elementType,
+      cookieSecurity: i().bool,
+      overlay: i().bool,
+      overlayClasses: i().string,
+      overlayStyle: i().object,
+      ariaAcceptLabel: i().string,
+      ariaDeclineLabel: i().string,
+    };
+  })(),
+    (module.exports = o);
 })();

@@ -1,5 +1,4 @@
 import * as React from "react";
-import Cookies from "js-cookie";
 
 export interface CookieConsentProps {
   location?: "top" | "bottom" | "none";
@@ -41,7 +40,10 @@ export interface CookieConsentProps {
   ariaDeclineLabel?: string;
 }
 
-export default class CookieConsent extends React.Component<CookieConsentProps, {}> {}
+/**
+ * Export the main CookieConsent function
+ */
+export function CookieConsent(): React.FC<CookieConsentProps>;
 
 /**
  * Returns the value of the consent cookie
@@ -50,5 +52,3 @@ export default class CookieConsent extends React.Component<CookieConsentProps, {
  * @param {*} name optional name of the cookie
  */
 export function getCookieConsentValue(name?: string): string;
-
-export { Cookies };
