@@ -4,10 +4,10 @@
   "private": true,
   "homepage": "https://mastermindzh.github.io/react-cookie-consent",
   "dependencies": {
-    "react": "^16.8.6",
-    "react-cookie-consent": "^4.0.0",
-    "react-dom": "^16.13.1",
-    "react-scripts": "1.1.4"
+    "react": "^18.0.0",
+    "react-cookie-consent": "^7.4.1",
+    "react-dom": "^18.0.0",
+    "react-scripts": "5.0.0"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -18,6 +18,21 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.17.3",
+    "@babel/plugin-transform-object-assign": "^7.16.7",
+    "@babel/plugin-transform-react-jsx": "^7.17.3",
     "gh-pages": "^1.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
